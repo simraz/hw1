@@ -16,8 +16,34 @@ the function below should be the only one in this file.
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-  /* Add code here */
-// WRITE YOUR CODE HERE
+//base case
+  if (in == nullptr) {
+    return;
+  }
+    Node* temp = in; 
+    Node* nextValueNode = in->next;
+    temp->next = nullptr;
+    in = nextValueNode;
+    //recursion
+    split(in, odds, evens);
+
+//odd and even checks
+  if (temp->value %  2 == 0) {
+    addNode(evens, temp);
+  }
+  else {
+    addNode(odds, temp);
+  }
 }
 
 /* If you needed a helper function, write it here */
+//adds new node to the end of the new split lists
+void addNode(Node*& list, Node* node) {
+  if (list == nullptr) {
+    list = node;
+  }
+  else {
+    //starts at new list
+    addNode(list->next, node); 
+  }
+}
